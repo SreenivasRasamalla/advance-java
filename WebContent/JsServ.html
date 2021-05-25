@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Js Calling</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+	alert('Js called');
+function calServletWithJs(methodtype){
+	alert("calservlet method is called Successfully");
+	var Name=document.getElementById("myName").value;
+	document.getElementById("JsSer").action='./JsServlet',
+	document.getElementById("JsSer").method=methodtype,
+	document.getElementById("JsSer").submit; 
+	alert('done');
+}
+
+</script>
+</head>
+<body>
+<form id="JsSer">
+FirstName: <input type="text" name="myName" id="myName"/>
+			<input type="submit" onclick="calServletWithJs('GET')" value="doGet"/>
+			<input type="submit" onclick="calServletWithJs('POST')" value="doPost"/> 
+</form>
+
+</body>
+</html>

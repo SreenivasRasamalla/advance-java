@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>JQuery Validation Form</title>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+
+<style>
+
+body {
+  margin: 30px 0;
+  font-family: 'monotype corsiva';
+  font-weight: 300;
+  font-size: 1.5rem;
+  width: 500px;
+}
+
+form, p {
+  margin: 20px;
+}
+
+p.note {
+  font-size: 1rem;
+  color: yellow;
+}
+
+input, textarea {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 4px;
+  font-family: 'Lato';
+  width: 300px;
+  margin-top: 10px;
+}
+
+label {
+  width: 300px;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+label span {
+  font-size: 1rem;
+}
+
+label.error {
+    color: red;
+    font-size: 1rem;
+    display: block;
+    margin-top: 5px;
+}
+
+input.error, textarea.error {
+    border: 1px dashed red;
+    font-weight: 300;
+    color: red;
+}
+
+[type="submit"], [type="reset"], button, html [type="button"] {
+    margin-left: 0;
+    border-radius: 0;
+    background: black;
+    color: white;
+    border: none;
+    font-weight: 300;
+    padding: 10px 0;
+    line-height: 1;
+}
+
+</style>
+
+<script>
+
+$(document).ready(function() {
+	  $("#myform").validate({
+	    rules: {
+	      name : {
+	        required: true,
+	        minlength: 3
+	      },
+	      age: {
+	        required: true,
+	        number: true,
+	        min: 18
+	      },
+	      email: {
+	        required: true,
+	        email: true
+	      },
+	      mobilenumber: {
+	        required:  {
+	          depends: function(elem) {
+	            return $("#age").val() > 50
+	          }
+	        },
+	        number: true,
+	        min: 1
+	      }
+	    },
+	    messages : {
+	      name: {
+	        minlength: "Name should be at least 3 characters"
+	      },
+	      age: {
+	        required: "Please enter your age &#128545",
+	        number: "Please enter your age as a numerical value",
+	        min: "You must be at least 18 years old"
+	      },
+	      email: {
+	        email: "The email should be in the format: abc@domain.tld"
+	      },
+	      mobilenumber: {
+	        required: "Please enter your mobilenumber",
+	        number: "Please enter your mobilenumber as a numerical value &#128545"
+	      }
+	    }
+	  });
+	});
+	
+	</script>
+	
+<body>
+
+<form id="myform" action="" method="post">
+    <p>
+      <label for="name">Name <span>(required, at least 3 characters)</span></label>
+      <input id="name" name="name">
+    </p>
+  <p>
+      <label for="age">Your Age <span>(minimum 18)</span></label>
+      <input id="age" name="age">
+    </p>
+    <p>
+      <label for="email">E-Mail <span>(required)</span></label>
+      <input id="email" name="email">
+    </p>
+  <p>
+    <label for="mobilenumber">Mobile Number <span>(required)</span></label>
+    <input id="mobilenumber" name="mobilenumber">
+    </p>
+    <p>
+      <input class="submit" type="submit" value="SUBMIT">
+    </p>
+</form>
+
+</body>
+</html>
